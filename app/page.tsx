@@ -6,15 +6,16 @@ import { LoadMore } from "./components/ui/LoadMore";
 
 export default async function Home() {
 
-  const locationData: LocationData | null = await fetchLocations(1);
+  const locationData: LocationData | null = await fetchLocations("https://rickandmortyapi.com/api/location");
   const newLocations = locationData?.results ?? [];
+  const nextUrl = locationData?.info.next ?? null;
 
   return (
     <>
       <div className="join join-vertical w-full">
         <LocationAccordion locations={newLocations} />
       </div>
-      <LoadMore/>
+      <LoadMore nextUrl={nextUrl}/>
     </>
   );
 }

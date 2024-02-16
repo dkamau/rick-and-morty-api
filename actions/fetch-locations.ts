@@ -2,11 +2,14 @@
 
 import { LocationData } from "@/app/models/LocationData";
 
-export async function fetchLocations(page:number) {
+export async function fetchLocations(url: string | null) {
     try {
-        const response = await fetch("https://rickandmortyapi.com/api/location?page=" + page);
-        const data = await response.json();
-        return data as LocationData;
+        if (url !== null) {
+            const response = await fetch(url);
+            const data = await response.json();
+            return data as LocationData;
+        }
+        return null;
     } catch (error) {
         console.error("Error fetching data: ", error);
         return null;
