@@ -7,25 +7,29 @@ import { Spinner } from "./Spinner";
 import { fetchLocations } from "@/actions/fetch-locations";
 import LocationAccordion from "../accordions/LocationAccordion";
 
-export function LoadMore() {
+export interface LoadMoreProps {
+    nextUrl: string | null;
+}
+
+export function LoadMore({nextUrl}: LoadMoreProps) {
     const [locations, setLocations] = useState<Location[]>([]);
-    const [pagesLoaded, setPagesLoaded] = useState(1);
+    const [nextPage, setNextPage] = useState(nextUrl);
 
     const { ref, inView } = useInView();
 
     const loadMoreLocations = async () => {
         //await delay(2000);
-        const nextPage = pagesLoaded + 1;
         const locationData = await fetchLocations(nextPage);
         const newLocations = locationData?.results ?? [];
+        const next = locationData?.info.next ?? null;
 
         setLocations((prevLocations: Location[]) => [...prevLocations, ...newLocations]);
-        setPagesLoaded(nextPage);
+        setNextPage(next);
     }
 
     useEffect(() => {
         if (inView) {
-            console.log("scrolled to the end");
+            console.log(nextPage);
             loadMoreLocations();
         };
     }, [inView]);
