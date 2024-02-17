@@ -4,7 +4,7 @@ import { Location } from "@/app/models/LocationData"
 import { useEffect, useState } from "react"
 import { useInView } from "react-intersection-observer"
 import { Spinner } from "./Spinner";
-import { fetchLocations } from "@/actions/fetch-locations";
+import { fetchLocations, fetchLocationsAndResidents } from "@/actions/fetch-locations";
 import LocationAccordion from "../accordions/LocationAccordion";
 
 export interface LoadMoreProps {
@@ -29,7 +29,6 @@ export function LoadMore({nextUrl}: LoadMoreProps) {
 
     useEffect(() => {
         if (inView) {
-            console.log(nextPage);
             loadMoreLocations();
         };
     }, [inView]);
