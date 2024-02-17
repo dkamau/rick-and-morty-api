@@ -1,12 +1,35 @@
 "user-server"
 
 import { LocationData } from "@/app/models/LocationData";
+import { LocationResident, LocationResidentData } from "@/app/models/LocationResidentData";
+import { Resident } from "@/app/models/ResidentData";
+import { fetchResidents } from "./fetch-residents";
 
-export async function fetchLocations(page:number) {
+export async function fetchLocationsAndResidents(url: string | null) {
     try {
-        const response = await fetch("https://rickandmortyapi.com/api/location?page=" + page);
-        const data = await response.json();
-        return data as LocationData;
+        if (url !== null) {
+            const response = await fetch(url);
+            let data: LocationData = await response.json();
+
+            let locationsAndResidents: LocationResident[] = [];
+
+            for (const item of data.results) {
+                const residents: Resident[] | null = await fetchResidents(item.residents); 
+                locationsAndResidents.push({
+                    location: item,
+                    residents: residents,
+                });
+            }
+            
+            const locationsResidentData: LocationResidentData = {
+                nextPage: data.info.next,
+                locationAndResidents: locationsAndResidents
+            };
+
+            console.log(locationsResidentData);
+            return locationsResidentData;
+        }
+        return null;
     } catch (error) {
         console.error("Error fetching data: ", error);
         return null;

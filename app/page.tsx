@@ -1,20 +1,20 @@
-import { fetchLocations } from "@/actions/fetch-locations";
-import { LocationData } from "./models/LocationData";
+import { fetchLocationsAndResidents } from "@/actions/fetch-locations";
 import LocationAccordion from "./components/accordions/LocationAccordion";
-import { Spinner } from "./components/ui/Spinner";
 import { LoadMore } from "./components/ui/LoadMore";
+import { LocationResidentData } from "./models/LocationResidentData";
 
 export default async function Home() {
 
-  const locationData: LocationData | null = await fetchLocations(1);
-  const newLocations = locationData?.results ?? [];
+  const locationAndResidentsData: LocationResidentData | null = await fetchLocationsAndResidents("https://rickandmortyapi.com/api/location");
+  const newLocations = locationAndResidentsData?.locationAndResidents ?? [];
+  const nextUrl = locationAndResidentsData?.nextPage ?? null;
 
   return (
     <>
       <div className="join join-vertical w-full">
-        <LocationAccordion locations={newLocations} />
+        <LocationAccordion locationAndResidents={newLocations} />
       </div>
-      <LoadMore/>
+      <LoadMore nextUrl={nextUrl}/>
     </>
   );
 }
