@@ -25,8 +25,6 @@ export async function fetchLocationsAndResidents(url: string | null) {
                 nextPage: data.info.next,
                 locationAndResidents: locationsAndResidents
             };
-
-            console.log(locationsResidentData);
             return locationsResidentData;
         }
         return null;
