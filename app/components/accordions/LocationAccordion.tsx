@@ -13,7 +13,7 @@ export function LocationAccordion({ locations }: LocationProps) {
                     <div key={location.id} className="collapse collapse-arrow join-item border border-base-300">
                         <input type="radio" name="my-accordion-1" defaultChecked={true} />
                         <div className="collapse-title text-xl font-medium">
-                            {location.id}. {location.name}
+                            {location.id}. {location.name} <small className='float-right'>{location.type}</small>
                         </div>
                         <div className="collapse-content">
                             <p>hello</p>
