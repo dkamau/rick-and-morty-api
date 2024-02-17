@@ -7,7 +7,7 @@ export async function fetchResidents(urls: string[] | null) {
         if (urls !== null) {
             const userIds = getIds(urls);
             if (userIds.length > 0) {
-                const response = await fetch("https://rickandmortyapi.com/api/character/" + userIds);
+                const response = await fetch("https://rickandmortyapi.com/api/character/[" + userIds + "]");
                 const data = await response.json();
                 return data as Resident[];
             }

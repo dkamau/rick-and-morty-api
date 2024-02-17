@@ -1,14 +1,11 @@
-import { fetchResidents } from '@/actions/fetch-residents';
 import { Resident } from '@/app/models/ResidentData'
 import React from 'react'
 
 export interface ResidentProps {
-    residentUrls: string[] | null;
+    residents: Resident[] | null;
 }
 
-const ResidentCard = ({ residentUrls }: ResidentProps) => {
-    const residents: Resident[] | null = []; //await fetchResidents(residentUrls);
-    
+const ResidentCard = ({ residents }: ResidentProps) => {
     return (
         <>
             {
