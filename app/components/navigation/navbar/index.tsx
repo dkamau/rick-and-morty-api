@@ -5,7 +5,7 @@ const Navbar = () => {
     return (
         <div className="navbar bg-sky-300 sticky top-0 z-50">
             <div className="flex-1">
-                <Link href="/" className="btn btn-ghost text-xl">Rick & Morty Locations</Link>
+                <Link href="/" className="btn btn-ghost text-xl">Rick & Morty Locations and Residents</Link>
             </div>
             <div className="flex-none gap-2">
                 <div className="dropdown dropdown-end">

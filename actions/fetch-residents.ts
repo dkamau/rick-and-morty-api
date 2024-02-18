@@ -2,6 +2,17 @@
 
 import { Resident } from "@/app/models/ResidentData";
 
+export async function fetchResident(userId: string) {
+    try {
+        const response = await fetch("https://rickandmortyapi.com/api/character/" + userId);
+        const data = await response.json();
+        return data as Resident;
+    } catch (error) {
+        console.error("Error fetching data: ", error);
+        return null;
+    }
+}
+
 export async function fetchResidents(urls: string[] | null) {
     try {
         if (urls !== null) {

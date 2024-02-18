@@ -13,12 +13,12 @@ export function LocationAccordion({ locationAndResidents }: LocationProps) {
 
     return (
         <>
-            <Search search={search} setSearch={setSearch}/>
+            <Search setSearch={setSearch} />
             {
                 locationAndResidents ? (locationAndResidents.filter((item) => {
                     return search.toLowerCase() === '' ? item :
-                    item.location.name.toLocaleLowerCase().includes(search) ||
-                    item.residents?.find(e => e.name.toLowerCase().includes(search))
+                        item.location.name.toLocaleLowerCase().includes(search.toLowerCase()) ||
+                        item.residents?.find(e => e.name.toLowerCase().includes(search.toLocaleLowerCase()))
                 }).map(data =>
                     <div key={data.location.id} className="collapse collapse-arrow join-item border border-base-300">
                         <input type="checkbox" name="my-accordion-1" defaultChecked={false} />
