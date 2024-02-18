@@ -1,4 +1,4 @@
-import { Resident } from '@/app/models/ResidentData'
+import { Resident } from '@/app/models/LocationsAndResidentsData';
 import Link from 'next/link';
 import React from 'react'
 
@@ -14,7 +14,7 @@ const ResidentCard = ({ residents }: ResidentProps) => {
                     <Link key={resident.id} href={{
                         pathname: "/resident/details/",
                         query: {
-                            userId: resident.id
+                            residentId: resident.id
                         }
                     }}>
                         <div className="flex flex-col justify-center m-8 text-center">
