@@ -16,7 +16,7 @@ const Search = ({ setSearch }: SearchProps) => {
                     </svg>
                 </div>
                 <input onChange={(e) => setSearch(e.target.value)}
-                type="text" placeholder="Search by location or character name..." className="input input-bordered w-full ps-10" />
+                type="text" placeholder="Search by location, character, or episode name..." className="input input-bordered w-full ps-10" />
             </div>
         </div>
     )

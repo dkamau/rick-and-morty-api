@@ -38,7 +38,7 @@ const NoteList = ({ userId, residentName }: NoteListProps) => {
 
     useEffect(()=> {
         localStorage.setItem(`res${userId}`, JSON.stringify(notes));
-    }, [notes])
+    }, [notes, userId])
 
     let id = 0;
 

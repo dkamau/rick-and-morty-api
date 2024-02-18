@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import ResidentCard from './ResidentCard';
 
 import Search from './Search';
-import { LocationResult } from '@/app/models/LocationsAndResidentsData';
+import { Episode, LocationResult } from '@/app/models/LocationsAndResidentsData';
 
 export interface LocationProps {
     locationsAndResidents: LocationResult[] | null;
@@ -11,14 +11,26 @@ export interface LocationProps {
 export function LocationAccordion({ locationsAndResidents }: LocationProps) {
     const [search, setSearch] = useState("");
 
+    function getEpisodes(locationId: number) {
+        const allEpisodes: string | undefined = locationsAndResidents?.filter(l => l.id == locationId)
+            .map(l => l.residents
+                .map(r => r.episode
+                    .map(e => e.name))).join(",");
+
+        const distinctEpisodes = allEpisodes?.split(',').filter((value, index, array) => array.indexOf(value) === index);
+
+        return distinctEpisodes?.join(" | ");
+    }
+
     return (
         <>
             <Search setSearch={setSearch} />
             {
                 locationsAndResidents ? (locationsAndResidents.filter((item) => {
-                    return search.toLowerCase() === '' ? item :
+                    return search === '' ? item :
                         item.name.toLocaleLowerCase().includes(search.toLowerCase()) ||
-                        item.residents?.find(e => e.name.toLowerCase().includes(search.toLocaleLowerCase()))
+                        item.residents?.find(r => r.name.toLowerCase().includes(search.toLocaleLowerCase())) ||
+                        item.residents?.find(r => r.episode.find(e => e.name.toLocaleLowerCase().includes(search.toLocaleLowerCase())))
                 }).map(data =>
                     <div key={data.id} className="collapse collapse-arrow join-item border border-base-300">
                         <input type="checkbox" name="my-accordion-1" defaultChecked={false} />
@@ -37,6 +49,8 @@ export function LocationAccordion({ locationsAndResidents }: LocationProps) {
                                     <div className="flex flex-row flex-wrap-reverse justify-center">
                                         <ResidentCard residents={data.residents} />
                                     </div>
+                                    <p className="text-center text-xl font-semibold dark:text-gray-200">Episodes:</p>
+                                    <p className="px-20 text-center dark:text-gray-400">{getEpisodes(data.id)}</p>
                                 </div>
                             </section>
                         </div>

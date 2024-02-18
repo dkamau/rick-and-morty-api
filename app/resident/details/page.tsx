@@ -2,6 +2,7 @@ import { fetchResident } from '@/actions/fetch-data'
 import BackButton from '@/app/components/ui/BackButton'
 import NoteList from '@/app/components/ui/NoteList'
 import { Resident } from '@/app/models/LocationsAndResidentsData'
+import Image from 'next/image'
 
 const ResidentDetails = async ({ searchParams }: {
   searchParams: {
@@ -10,6 +11,14 @@ const ResidentDetails = async ({ searchParams }: {
 }) => {
 
   const resident: Resident | null | undefined = await fetchResident(searchParams.residentId);
+
+  function getImage(imgUrl: string | undefined) {
+    let url: string = "";
+    if (imgUrl !== undefined) {
+      url = imgUrl ;
+    }
+    return url;
+  }
 
   return (
     <div className="px-16">
@@ -32,7 +41,7 @@ const ResidentDetails = async ({ searchParams }: {
           </div>
           <div className="relative">
             <div className="w-48 h-48 bg-indigo-100 mx-auto rounded-full shadow-2xl absolute inset-x-0 top-0 -mt-24 flex items-center justify-center text-indigo-500">
-              <img alt="..." src={resident?.image} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
+              <img alt="..." src={getImage(resident?.image)} className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px" />
             </div>
           </div>
           <div className="space-x-8 flex justify-between mt-32 md:mt-0 md:justify-center">

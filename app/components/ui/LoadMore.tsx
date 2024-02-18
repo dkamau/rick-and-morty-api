@@ -17,21 +17,22 @@ export function LoadMore({nextPageNumber}: LoadMoreProps) {
 
     const { ref, inView } = useInView();
 
-    const loadMoreLocations = async () => {
-        //await delay(2000);
-        const locationsAndResidentsData: LocationsAndResidentsData | null = await fetchLocationsAndResidents(nextPage);
-        const newlocationsAndResidents = locationsAndResidentsData?.data.locations.results ?? [];
-        const next = locationsAndResidentsData?.data.locations.info.next ?? null;
-
-        setLocations((prevlocationsAndResidents: LocationResult[]) => [...prevlocationsAndResidents, ...newlocationsAndResidents]);
-        setNextPage(next);
-    }
+    
 
     useEffect(() => {
+        const loadMoreLocations = async () => {
+            const locationsAndResidentsData: LocationsAndResidentsData | null = await fetchLocationsAndResidents(nextPage);
+            const newlocationsAndResidents = locationsAndResidentsData?.data.locations.results ?? [];
+            const next = locationsAndResidentsData?.data.locations.info.next ?? null;
+    
+            setLocations((prevlocationsAndResidents: LocationResult[]) => [...prevlocationsAndResidents, ...newlocationsAndResidents]);
+            setNextPage(next);
+        }
+        
         if (inView) {
             loadMoreLocations();
         };
-    }, [inView]);
+    }, [inView, nextPage]);
 
     return (
         <>
