@@ -1,17 +1,25 @@
-import { Location } from '@/app/models/LocationData'
-import React from 'react'
+import React, { useState } from 'react'
 import ResidentCard from '../cards/ResidentCard';
+
 import { LocationResident, LocationResidentData } from '@/app/models/LocationResidentData';
+import Search from '../ui/Search';
 
 export interface LocationProps {
     locationAndResidents: LocationResident[] | null;
 }
 
 export function LocationAccordion({ locationAndResidents }: LocationProps) {
+    const [search, setSearch] = useState("");
+
     return (
         <>
+            <Search setSearch={setSearch} />
             {
-                locationAndResidents ? (locationAndResidents.map(data =>
+                locationAndResidents ? (locationAndResidents.filter((item) => {
+                    return search.toLowerCase() === '' ? item :
+                        item.location.name.toLocaleLowerCase().includes(search.toLowerCase()) ||
+                        item.residents?.find(e => e.name.toLowerCase().includes(search.toLocaleLowerCase()))
+                }).map(data =>
                     <div key={data.location.id} className="collapse collapse-arrow join-item border border-base-300">
                         <input type="checkbox" name="my-accordion-1" defaultChecked={false} />
                         <div className="collapse-title text-xl font-medium">

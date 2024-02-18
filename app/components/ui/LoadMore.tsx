@@ -12,7 +12,7 @@ export interface LoadMoreProps {
 }
 
 export function LoadMore({nextUrl}: LoadMoreProps) {
-    const [ocationAndResidents, setLocations] = useState<LocationResident[]>([]);
+    const [locationAndResidents, setLocations] = useState<LocationResident[]>([]);
     const [nextPage, setNextPage] = useState(nextUrl);
 
     const { ref, inView } = useInView();
@@ -35,7 +35,7 @@ export function LoadMore({nextUrl}: LoadMoreProps) {
 
     return (
         <>
-            <LocationAccordion locationAndResidents={ocationAndResidents}/>
+            <LocationAccordion locationAndResidents={locationAndResidents}/>
             <div ref={ref} className="flex justify-center p-4 col-span-1 sm:col-span-2 md:col-span-3">
                 <Spinner/>
             </div> 
