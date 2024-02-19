@@ -1,4 +1,4 @@
-export interface CharacterNote {
+export interface ResidentNote {
     date: string
     note: string
 }

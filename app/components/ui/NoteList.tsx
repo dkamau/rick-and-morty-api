@@ -1,6 +1,6 @@
 "use client"
 
-import { CharacterNote } from '@/app/models/CharacterNote';
+import { ResidentNote } from '@/app/models/ResidentNote';
 import React, { useEffect, useState } from 'react'
 
 export interface NoteListProps {
@@ -12,11 +12,11 @@ const NoteList = ({ userId, residentName }: NoteListProps) => {
 
     const [showAddNote, setShowAddNote] = useState(false);
     const [note, setNote] = useState("");
-    const [notes, updateNotes] = useState<CharacterNote[]>(():CharacterNote[] => {
+    const [notes, updateNotes] = useState<ResidentNote[]>((): ResidentNote[] => {
         if (typeof window !== "undefined") {
             const storedNotes = window.localStorage.getItem(`res${userId}`);
             if (storedNotes !== null && storedNotes !== "undefined") {
-                return JSON.parse(storedNotes);
+                return JSON.parse(storedNotes);;
             }
         };
 
@@ -24,21 +24,23 @@ const NoteList = ({ userId, residentName }: NoteListProps) => {
     });
 
     function addNote() {
-        updateNotes((prevNotes: CharacterNote[]) => [...prevNotes, {
-            note: note,
-            date: Date()
-        }]);
-        setShowAddNote(false);
-        setNote("");
+        if (note) {
+            updateNotes((prevNotes: ResidentNote[]) => [...prevNotes, {
+                note: note,
+                date: Date()
+            }]);
+            setShowAddNote(false);
+            setNote("");
+        }
     }
 
     function removeNote(note: string) {
         updateNotes(notes.filter(n => n.note !== note));
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         localStorage.setItem(`res${userId}`, JSON.stringify(notes));
-    }, [notes])
+    }, [notes, userId])
 
     let id = 0;
 
