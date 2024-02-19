@@ -1,4 +1,4 @@
-![alt text](https://github.com/[dkamau]/[rick-and-morty-api]/blob/[develop]/screenshots/landing-page.png?raw=true)
+![Alt text](relative%20path/to/landing-page.png?raw=true "Landing Page")
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
