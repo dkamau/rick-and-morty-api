@@ -1,4 +1,5 @@
-![Alt text](relative%20path/to/landing-page.png?raw=true "Landing Page")
+<img width="1885" alt="landing-page" src="https://github.com/dkamau/rick-and-morty-api/assets/34334743/2fa447ff-cba7-4a79-be12-04086ba375ff">
+
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
