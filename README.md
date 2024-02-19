@@ -1,3 +1,5 @@
+![alt text](https://github.com/[dkamau]/[rick-and-morty-api]/blob/[main]/screenshots/landing-page.png?raw=true)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
