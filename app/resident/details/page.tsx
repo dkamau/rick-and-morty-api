@@ -2,7 +2,6 @@ import { fetchResident } from '@/actions/fetch-data'
 import BackButton from '@/app/components/ui/BackButton'
 import NoteList from '@/app/components/ui/NoteList'
 import { Resident } from '@/app/models/LocationsAndResidentsData'
-import Image from 'next/image'
 
 const ResidentDetails = async ({ searchParams }: {
   searchParams: {
